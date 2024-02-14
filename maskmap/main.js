@@ -143,9 +143,14 @@ function getTable(time) {
   return table;
 }
 
+function goPharmacy(id){
+  window.location.hash = id
+}
+
 pharmacyWrap.onclick = (e) => {
   let crds;
   crds = e.target.className=="pharmacy"?[e.target.dataset.lat, e.target.dataset.lnt]:getDataset(e.target)
+  goPharmacy(`${crds[0]},${crds[1]}`)
   zoomMap(crds)
 }
 
