@@ -1,0 +1,63 @@
+使用webpack建置寫好的html js css
+
+所有東西一樣是放在src內部
+只是不用在dist資料夾建立html 
+這個html未來會使用webpack插件建立
+
+直接將寫好的html js css放在 src資料夾
+
+並安裝 
+npm install --save-dev html-webpack-plugin
+這插件將src內寫好的html輸出在dist上
+npm install --save-dev style-loader css-loader
+讓webpack可以讀取css
+
+
+在webpack.config.js中
+宣告htmlwebpack插件變數
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+並且 在module.exports = {} 中宣告plugins插件
+
+module.exports = {
+  // 其他Webpack組態...
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/index.html', // 指定範本檔案
+      filename: 'index.html', // 輸出的HTML檔案名稱，默認也是index.html
+    }),
+  ],
+  module:{   
+     rules: [
+      {   //這個物件是說明css模組載入的規則
+        test:/\.css$/i,
+        //注意，有順序之分 先style後css
+        use:["style-loader","css-loader"]
+    },{  
+      test: /\.(png|svg|jpg|jpeg|gif)$/i,  //載入靜態物件說明
+      type: 'asset/resource',
+    },
+    ]
+  }
+};
+
+然後在入口js內 import css
+import './style.css';
+
+這樣就能使用html 和 css了
+
+如果有靜態圖片需求
+
+一樣是透過js引入img的路徑
+
+引入
+import clock from "./assets/icons_clock.png"
+import pin from   "./assets/icons_pin.png"
+.....
+
+使用
+<div class="smallPic"><img src="${clock}"></div>
+不能直接引用路徑
+錯誤範例
+<img src="./assets/icons_pin.png">  這樣會烙賽
