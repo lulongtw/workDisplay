@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0 , width=device-width" />
+    <link rel="stylesheet" type="text/css" href="" />
+    <title>first</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.1.1/redux.min.js"></script>
+    <script src="https://unpkg.com/@reduxjs/toolkit/dist/redux-toolkit.umd.js"></script>
+    <style>
+      .board {
+        width: 300px;
+        height: 300px;
+        border: 2px solid black;
+        /*沒border就可以border-box
+        為啥這邊不能border-box
+       不能啊  因為現在border是在width300外面，也就是說其實是302px
+       一但border-box後 border內縮 width變298 這樣就放不下了
+        */
+        position: relative;
+        margin: 30px auto;
+        /*
+                .obard不用flex 和flex-wrap的話，就用inline-block害vertical-align
+        因為vertical-align是baseline對其  會有空白 = =  向上對其就不會了
+        */
+      }
+      .cell {
+        width: 100px;
+        height: 100px;
+        border: 1px solid black;
+        display: inline-block;
+        vertical-align: top;
+        box-sizing: border-box;
+        line-height: 100px;
+        text-align: center;
+        transition: background-color 0.5s;
+      }
+      .svg {
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .cell:hover {
+        background-color: grey;
+      }
+      .ref {
+        width: 150px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 20px;
+        background-color: grey;
+        margin: 20px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/babel">
+      class Svg extends React.Component {
+        constructor() {
+          super();
+        }
+        render() {
+          let strtx = (this.props.strt % 3) * 100 + 50;
+          let strty = Math.floor(this.props.strt / 3) * 100 + 50;
+          let endx = (this.props.end % 3) * 100 + 50;
+          let endy = Math.floor(this.props.end / 3) * 100 + 50;
+          return (
+            <svg className="svg">
+              <line
+                x1={strtx}
+                y1={strty}
+                x2={endx}
+                y2={endy}
+                stroke="red"
+                strokeWidth="10"
+              ></line>
+            </svg>
+          );
+        }
+      }
+
+      class Cell extends React.Component {
+        constructor() {
+          super();
+        }
+        render() {
+          let text = "";
+          if (this.props.st == 0) {
+            text = "O";
+          } else if (this.props.st == 1) {
+            text = "X";
+          }
+          return (
+            <div className="cell" onClick={this.func.bind(this)}>
+              {text}
+            </div>
+          );
+        }
+        func() {
+          if (redux.store.getState().winner == null && this.props.st == -1)
+            redux.store.dispatch({
+              type: "SHIT",
+              idx: this.props.idx,
+            });
+        }
+      }
+
+      class Board extends React.Component {
+        constructor() {
+          super();
+          this.state = redux.store.getState();
+        }
+        render() {
+          let cells = [];
+          for (let i = 0; i < this.state.mrks.length; i++) {
+            cells.push(<Cell key={i} idx={i} st={this.state.mrks[i]} />);
+          }
+          if (this.state.winner == null) {
+            return (
+              <div className="board">
+                {cells}
+                <div className="ref" onClick={this.ref.bind(this)}>
+                  refresh
+                </div>
+              </div>
+            );
+          } else if (this.state.winner.res == "even") {
+            return (
+              <div className="board">
+                {cells}
+                <div className="ref" onClick={this.ref.bind(this)}>
+                  refresh
+                </div>
+                <div
+                  style={{
+                    fontSize: "3rem",
+                    textAlign: "center",
+                    margin: "20px",
+                  }}
+                >
+                  even
+                </div>
+              </div>
+            );
+          } else {
+            return (
+              <div className="board">
+                {cells}
+                <div className="ref" onClick={this.ref.bind(this)}>
+                  ref
+                </div>
+                <div
+                  style={{
+                    fontSize: "3rem",
+                    textAlign: "center",
+                    margin: "20px",
+                  }}
+                >
+                  winner is {this.state.winner.sd} side
+                </div>
+                <Svg
+                  strt={this.state.winner.strt}
+                  end={this.state.winner.end}
+                />
+              </div>
+            );
+          }
+        }
+        componentDidMount() {
+          redux.store.subscribe(this.hndlr.bind(this));
+        }
+        ref() {
+          redux.store.dispatch({
+            type: "HOLE",
+          });
+        }
+        hndlr() {
+          this.setState(redux.store.getState());
+        }
+      }
+      let redux = {
+        store: null,
+        rdcr: function (st, ac) {
+          switch (ac.type) {
+            case "SHIT":
+              st.mrks[ac.idx] = st.c % 2;
+              st.c++;
+              return {
+                c: st.c,
+                mrks: st.mrks,
+                winner: redux.ck(st.mrks, st.c), //為啥你可以直接用
+              };
+
+            case "HOLE":
+              return {
+                c: 0,
+                mrks: [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+                winner: null,
+              };
+            default:
+              return st;
+          }
+        },
+        ck: function (mks, c) {
+          let sd;
+          for (let x = 0; x < 3; x++) {
+            if (
+              mks[x * 3] != -1 &&
+              mks[x * 3] == mks[x * 3 + 1] &&
+              mks[x * 3 + 1] == mks[x * 3 + 2]
+            ) {
+              sd = mks[x * 3] === 0 ? "O" : "X";
+              return { strt: x * 3, end: x * 3 + 2, sd: sd };
+            }
+          }
+          for (let y = 0; y < 3; y++) {
+            if (
+              mks[y] != -1 &&
+              mks[y] == mks[y + 3] &&
+              mks[y + 3] == mks[y + 6]
+            ) {
+              sd = mks[y] === 0 ? "O" : "X";
+              return { strt: y, end: y + 6, sd: sd };
+            }
+          }
+
+          if (mks[0] != -1 && mks[0] == mks[4] && mks[4] == mks[8]) {
+            sd = mks[0] === 0 ? "O" : "X";
+            return { strt: 0, end: 8, sd: sd };
+          }
+
+          if (mks[2] != -1 && mks[2] == mks[4] && mks[4] == mks[6]) {
+            sd = mks[2] === 0 ? "O" : "X";
+            return { strt: 2, end: 6, sd: sd };
+          }
+          for (let i = 0; i < 9; i++) {
+            let count = 0;
+            if (mks[i] == -1) {
+            }
+          }
+          if (c == 9) {
+            return { res: "even" };
+          }
+          return null; //沒加
+        },
+      };
+
+      window.onload = function () {
+        redux.store = Redux.createStore(redux.rdcr, {
+          c: 0,
+          mrks: [-1, -1, -1, -1, -1, -1, -1, -1, -1],
+          winner: null,
+        });
+        let con = document.createElement("div");
+        document.body.appendChild(con);
+        let rt = ReactDOM.createRoot(con);
+        rt.render(<Board />);
+      };
+    </script>
+  </body>
+</html>
