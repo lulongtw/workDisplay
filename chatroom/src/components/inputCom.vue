@@ -38,11 +38,11 @@
 <template>
   <div class="inputWrap">
     <div class="input-group mb-3">
-   <input v-model="user" type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+   <input v-model="user" type="text" class="form-control" placeholder="誰" aria-label="Example text with button addon" aria-describedby="button-addon1">
   </div>
 
   <div class="input-group mb-3">
-    <input v-model="text" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+    <input v-model="text" type="text" class="form-control" placeholder="說" aria-label="Recipient's username" aria-describedby="button-addon2">
     <button @click="send" class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
   </div>
   </div>

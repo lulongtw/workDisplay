@@ -1,19 +1,11 @@
 <script setup>
-  import {RouterLink,RouterView} from "vue-router";
-
+import inputCom from "@/components/inputCom.vue";
+import roomCom from "@/components/roomCom.vue";
 </script>
 
 <template>
   <div class="wrap">
-    <RouterLink to="/com1">com1</RouterLink>
-    <br>
-    <RouterLink to="/com2">com2</RouterLink>
-    <hr>
-    <RouterView name="view" v-slot="{Component}">
-      <KeepAlive>
-        <component :is="Component"></component>
-      </KeepAlive>
-    </RouterView>
+    <inputCom></inputCom>
+    <roomCom></roomCom>
   </div>
-
 </template>
