@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.5/axios.min.js" integrity="sha512-TjBzDQIDnc6pWyeM1bhMnDxtWH0QpOXMcVooglXrali/Tj7W569/wd4E8EDjk1CwOAOPSJon1VfcEt1BI4xIrA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://kit.fontawesome.com/33d145f0f9.js" crossorigin="anonymous"></script>
+  
+      <!--
+        下方script google maps api
+      一個是V:beta beta是advencedMarkerView
+      advencedViewMarker沒有送content就是普通marker
+      送contnet才會客製化
+      這程式有送content 就是那個醫院小屋
+      跟google的高級圖釘差在動畫＠＠
+
+      用這樣可以就可以refreshMap(參數了)
+
+      一個是Ｖ：weekly媽的  weekly是普通marker
+         
+      -->
+  <style>
+
+    
+    *{
+      padding:0;
+      margin:0;
+      box-sizing: border-box;
+    }
+    nav{
+      height:100vh;
+      width:300px;
+      position:fixed;
+      
+    }
+    .inputWrap{
+      height:80px;
+      box-shadow: 0 0 5px gray;
+    }
+    .pharmacyWrap{
+      height:calc(100% - 80px);
+      overflow:scroll;
+      padding:10px;
+    }
+    .pharmacy{
+      margin-bottom:10px;
+      border:1px solid black;
+      border-radius: 10px;
+      padding:10px;
+    }
+    main{
+      width:calc(100vw - 300px);
+      height:100vh;
+      margin-left:300px;
+      background-color: red;
+    }
+    .qq{
+      width:30px;
+      height:30px;
+
+      background-color: red;
+    }
+
+    .green::after{
+        position:absolute;
+        content:"";
+        width:10px;height:10px;
+        border-radius:100%;
+        background-color: green;
+        top:0;bottom:0;right:0;left:0;
+        margin:auto
+      }
+      .red::after{
+        position:absolute;
+        content:"";
+        width:10px;height:10px;
+        border-radius:100%;
+        background-color: red;
+        top:0;bottom:0;right:0;left:0;
+        margin:auto
+      }
+      table {
+        border-collapse: collapse;
+        width:100%;
+        text-align: center;
+      }
+      td {
+        width:10px;height:30px;
+        border: 1px solid black;
+        position:relative
+      }
+      tr > td:first-of-type {
+        width: 30px;
+      }
+  </style>
+  <title>Document</title>
+</head>
+<body>
+  <nav>
+    <div class="inputWrap">
+      <div>縣市<select name="county" id="county"></select></div>
+      <div>地區<select name="town" id="town"></select></div>
+    </div>
+    <div class="pharmacyWrap">
+      
+    </div>
+  </nav>
+  <main></main>
+  <script type="module" src="main.js"></script>
+
+  <script>(g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})
+    ({key: "AIzaSyDlatLRSFrNSwdA6J8i9JNIMW66VCCDIa8", v: "beta"});</script>
+    <!-- V:一個是beta beta是advencedMarkerView
+      advencedViewMarker沒有送content就是普通marker
+      送contnet才會客製化
+
+      一個是weekly  weekly是普通marker
+         
+      -->
+</body>
+</body>
+</html>
