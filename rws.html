@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+				text-decoration: none;
+      }
+      #web {
+        max-width: 1024px;
+        margin: 0 auto;
+        background-color: rgb(246, 246, 246);
+      }
+      header {
+        margin: 0 auto;
+        background-image: url(./pic1/img-headerShape.png);
+        background-repeat: no-repeat; /**/
+        display: grid;
+        grid-template-columns: 40% 60%; /**/
+        padding: 100px;
+        padding-bottom: 50px; /**/
+        gap: 100px;
+      }
+      #person {
+        text-align: center;
+			
+
+      }
+      #person img {
+        width: 70%;
+        min-width: 150px;
+      }
+
+      .name {
+        font-size: 2.3rem;
+        font-weight: 800;
+        margin: 10px 0;
+      }
+      #cntts {
+        color: white;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        position: relative;
+        top: 20px;
+      }
+      #cntts img {
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+        vertical-align:middle;
+        margin-right: 10px;
+      }
+      .cnttcnt {
+        display: inline-block;
+        color: white;
+      }
+
+      main {
+        margin: 0 auto;
+      }
+      article {
+				/*
+				這種以後不要像這樣統一打 
+				要各別打 媽的累死
+				*/
+        width: 94%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 10px;
+        margin: 50px auto;
+      }
+
+      .articletitle {
+        grid-column: span 3;
+        text-align: center;
+        color: rgb(89, 51, 227);
+        margin-bottom: 20px;
+        font-size: 2rem;
+        font-weight: 800;
+      }
+      .skill {
+        background-color: white;
+        padding: 30px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+				
+        gap: 10px;
+        border-radius: 10px;
+      }
+      .skilltitle {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .skill img {
+        width: 30%;
+        margin-bottom: 20px;
+        /*
+        .skill和img都沒有設height，純粹賽道
+        因為三張圖高度都差不多，
+        如果是下面work那3張高度不一樣就要指定了
+        */
+      }
+
+      ul {
+			
+				margin-left:30px;
+			
+      }
+		/*
+		本來很帥的用align-self flex end（後來想想也忘了為啥要用這樣）
+		重點是之後為了media query 把ul用div .zzz包起來
+		整個大便
+		做media query要加標籤要申請
+		*/
+      li {
+        font-size: 0.7rem;
+      }
+      #skills .skill:nth-of-type(2) {
+				/*永遠很奇怪的nth-type*/
+        border-bottom: 5px solid rgb(245, 131, 55);
+      }
+      #skills .skill:nth-of-type(3) {
+        border-bottom: 5px solid rgb(41, 157, 2);
+      }
+      #skills .skill:nth-of-type(4) {
+        border-bottom: 5px solid rgb(157, 128, 254);
+      }
+      #timeline {
+        /*
+				很帥自以為聰明的用grid做
+				這種多格且不是每格都有東西
+        media之後row沒指定好 
+        會整個大翻車
+				用grid要一一指定
+				*/
+        grid-template-columns: 1fr 32px 1fr;
+        gap: 0px;
+        column-gap: 5px;
+      }
+      .position {
+        grid-column: 2;
+        grid-row:2;
+      }
+      .mid.head{
+        grid-row:3;
+      }
+      .mid.a{
+        grid-row:4
+      }
+      .cnt.a{
+        grid-row:4;
+      }
+      .cnt.b{
+        grid-row:5;
+      }
+      .mid.b{
+        grid-row:5
+      }
+      .mid.c{
+        grid-row:6;
+      }
+      .cnt.c{
+        grid-row:6;
+      }
+      .mid.end{
+        grid-row:7
+      }
+      #strtdot {
+        width: 32px;
+        height: 37px;
+        position: relative;
+        top: 5px;
+      }
+	
+      .position img:not([id="strtdot"]) {
+        width: 24px;
+        height: 28px;
+      }
+
+      .mid {
+        background: linear-gradient(
+          90deg,
+          transparent 45%,
+          rgb(217, 217, 217) 45%,
+          rgb(215, 215, 215) 55%,
+          transparent 55%
+        );
+        grid-column: 2;
+        text-align: center;
+        min-height:50px;
+        /*
+        指定最小高度，如果.cnt因為內容高，mid也跟著動
+        */
+      }
+
+      .cnt {
+        width: 300px;
+        border: 1px solid rgb(255, 61, 177);
+        border-radius: 10px;
+        padding: 10px 15px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background-color: white;
+        font-size: 0.8rem;
+        color: rgb(84, 84, 84);
+      
+      }
+
+      .cnt.a,
+      .cnt.c {
+        grid-column: 3;
+      }
+      .cnt.b {
+        grid-column: 1;
+        margin-left: auto;
+      }
+      .end {
+        border-bottom: 2px solid grey;
+      }
+      .headtitle {
+        font-size: 1rem;
+        color: brown;
+        font-weight: 800;
+      }
+      .sleep {
+        color: rgb(183, 183, 183);
+        font-size: 0.7rem;
+      }
+      #workcata {
+        gap: 10px;
+        margin: 20px auto;
+      }
+      .works {
+        text-align: center;
+        border-radius: 10px;
+      }
+      .works:hover {
+        box-shadow: 0 2px 2px 2px rgb(206, 206, 206);
+      }
+      #workcata .works:nth-of-type(2) {
+        background-color: rgb(252, 197, 241);
+      }
+      #workcata .works:nth-of-type(3) {
+        background-color: rgb(70, 70, 70);
+      }
+      #workcata .works:nth-of-type(4) {
+        background-color: rgb(138, 231, 254);
+      }
+      .works img {
+				/*
+				老師說，這種圖片在同一類box內的  要看起來一樣大小，
+				就是width%  height指定  懂不懂
+				*/
+        width: 25%;
+        height: 170px;
+        object-fit: contain;
+      }
+      #workcata .works:nth-of-type(2) img {
+				/*
+				遇到頑劣份子就另外搞
+				*/
+        width: 70%;
+        position: relative;
+        top: 10px;
+        left: 20px;
+      }
+      .workdes {
+        background-color: white;
+        padding: 5px;
+      }
+      .worktitle {
+        font-weight: 800;
+      }
+
+      #self {
+				/*
+				就說不要article統一做
+				*/
+        width: min(90%, 700px);
+        display: grid;
+        grid-template-columns: 40% 1fr;
+        gap: 30px;
+      }
+
+      #self > img {
+        width: 100%;
+      }
+
+      .self {
+        grid-column: 2/3;
+        white-space: pre-wrap;
+        line-height: 1.5rem;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+        padding: 30px 0;
+      }
+
+      footer {
+        background-image: url(./pic1/img-Looper-bg.png);
+        text-align: center;
+        height: 50px;
+        line-height: 50px;
+      }
+      @media only screen and (max-width: 1000px) {
+				header{
+					padding-top:60px;
+					background-position: 0px -60px;
+				}
+
+
+      }
+      @media only screen and (max-width: 800px) {
+				header{
+					padding-top:40px;
+					background-position: 0px -80px;
+				}
+        #workcata {
+          grid-template-columns: 1fr 1fr;
+        }
+        .works.c {
+          grid-column: 1;
+        }
+        #workcata img {
+          width: 20%;
+        }
+      }
+      @media only screen and (max-width: 720px) {
+				header{
+					gap:90px;
+				}
+				#cntts{
+					gap:10px;
+				}
+
+
+
+				.cnt {
+        width: 90%;
+				}
+				.self{
+					padding-top:0;
+				}
+      }
+      @media only screen and (max-width: 630px) {
+				#cntts{
+					font-size:0.7rem;
+				}
+
+        /**/
+
+        #skills {
+          grid-template-columns: 1fr;
+        }
+        .skill {
+          grid-column: 1;
+          height: 200px;
+          flex-direction: row;
+          justify-content: center;
+          padding-left: 30px;
+        }
+        .zzz {
+          width: 80%;
+        }
+        .skilltitle {
+          margin-bottom: 10px;
+
+          text-align: left;
+          text-indent: 30px;
+          width: 100%;
+        }
+        .skill img {
+          width: 30%;
+        }
+      }
+
+      @media only screen and (max-width: 500px) {
+				header{
+					background-size: contain;
+					background-position: 0px -60px ;
+
+					padding:20px;
+					padding-left:50px;
+				}
+				#cntts{
+					flex-direction: row;
+					gap:30px;
+				}
+				.cnttcnt{
+					display:none;
+				}
+				#person{
+					padding-top:40px;
+				}
+				.des1{
+					white-space: nowrap;
+				}
+
+        #timeline{
+          grid-template-columns:32px 1fr;
+        }
+      /*
+			無法直接用.cnt指定.cnt.b為2，要使用.cnt.b
+			因為階層問題 .cnt.b > .cnt
+			*/
+     
+        .cnt.b,
+        .cnt.a,
+        .cnt.c{
+          grid-column: 2;
+          margin-left:0;
+          margin:20px 0;
+        }
+   
+        .mid,.position{
+          grid-column:1;
+        }
+
+        #workcata {
+          grid-template-columns: 1fr;
+          gap: 0;
+						/*
+					gap超硬
+					變成1fr 還留有上世代的gap 會阻礙致中
+					*/
+          row-gap: 30px;
+        }
+
+        .works.b {
+          grid-column: 1;
+        }
+        #workcata img {
+          width: 15%;
+        }
+        #workcata .works:nth-of-type(2) img {
+          width: 40%;
+          left: 40px;
+        }
+
+        .articletitle {
+          border-bottom: 2px solid rgb(89, 51, 227);
+          text-align: left;
+          text-indent: 40px;
+        }
+				#self{
+					gap:0;
+
+				}
+				#self img{
+					display:none;
+
+				}
+				.self{
+					grid-column:span 2;
+					padding:20px;
+					
+
+					
+				}
+      }
+    </style>
+  </head>
+  <body>
+    <div id="web">
+      <header>
+        <div id="person">
+          <img src="./pic1/img-c-portrait-1804963_1920.png" alt="" />
+          <div class="name">媒介期</div>
+          <div class="des1">
+            Lorem ipsum dolor sit amet, consectetur adipisicing.
+          </div>
+          <div class="des2">Web Developer</div>
+        </div>
+        <div id="cntts">
+          <div class="cntt">
+            <a href=""
+              ><img id="location" src="./pic1/Icon-location.png" alt="" />
+              <div class="cnttcnt">Taipei/San Francisco</div></a
+            >
+          </div>
+          <div class="cntt">
+            <a href=""
+              ><img id="mail" src="./pic1/Icon-mail.png" alt="" />
+              <div class="cnttcnt">0806449@susugio.com</div></a
+            >
+          </div>
+          <div class="cntt">
+            <a href=""
+              ><img id="git" src="./pic1/icon-github.png" alt="" />
+              <div class="cnttcnt">linbaylinmovesusugio</div></a
+            >
+          </div>
+        </div>
+      </header>
+      <main>
+        <article id="skills">
+          <div class="articletitle">Mordern Web Skills</div>
+
+          <div class="skill">
+            <img id="skill1" src="./pic1/img-skill-icon-1.png" alt="" />
+            <div class="zzz">
+              <div class="skilltitle">web layout</div>
+              <ul class="skillcnt">
+                <li>RWD + Sass</li>
+                <li>Boostrap 3</li>
+                <li>FB pixel,schema.org</li>
+                <li>大型電子商務版型規畫經驗(2 years)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="skill">
+            <img id="skill2" src="./pic1/img-skill-icon-2.png" alt="" />
+            <div class="zzz">
+              <div class="skilltitle">JavaScript&Node.js</div>
+              <ul class="skillcnt">
+                <li>jQuery animation</li>
+                <li>AJAX/JSON</li>
+                <li>Vue.js(1 years)</li>
+                <li>Node.js/express</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="skill">
+            <img id="skill3" src="./pic1/img-skill-icon-3.png" alt="" />
+            <div class="zzz">
+              <div class="skilltitle">dev Helper</div>
+              <ul class="skillcnt">
+                <li>Git/Github</li>
+                <li>Heroku/AWS EC2,S3</li>
+                <li>gulp/webpack</li>
+                <li>介接歐付寶，玉山銀行金流經驗</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+
+        <article id="timeline">
+          <div class="articletitle">Experience</div>
+
+          <div class="position">
+            <img id="strtdot" src="./pic1/dot-start.png" alt="" />
+          </div>
+   
+          <div class="mid head"></div>
+          <div class="mid a">
+            <img src="./pic1/dot-timeitem.png" alt="" />
+          </div>
+          <div class="cnt a">
+            <div class="date">2016/01 - Present</div>
+            <div class="headtitle">Web Developer 資深工程師</div>
+            <div class="company">六角超有創意有限公司</div>
+            <div class="sleep">
+              Implemented a system for creating campaign landing pages from the
+              CMS.
+            </div>
+          </div>
+
+          <div class="cnt b">
+            <div class="date">2016/01 - Present</div>
+            <div class="headtitle">Web Developer 資深工程師</div>
+            <div class="company">六角超有創意有限公司</div>
+            <div class="sleep">
+              Implemented a system for creating campaign landing pages from the
+              CMS.
+            </div>
+          </div>
+          <div class="mid b">
+            <img src="./pic1/dot-timeitem.png" alt="" />
+          </div>
+
+          <div class="mid c">
+            <img src="./pic1/dot-timeitem.png" alt="" />
+          </div>
+          <div class="cnt c">
+            <div class="date">2016/01 - Present</div>
+            <div class="headtitle">Web Developer 資深工程師</div>
+            <div class="company">六角超有創意有限公司</div>
+            <div class="sleep">
+              Implemented a system for creating campaign landing pages from the
+              CMS.
+            </div>
+          </div>
+          <div class="mid end"></div>
+        </article>
+
+        <article id="workcata">
+          <div class="articletitle">works作品</div>
+          <div class="works a">
+            <img id="work1" src="./pic1/logo-work-1.png" alt="" />
+
+            <div class="workdes">
+              <div class="worktitle">works title1</div>
+              <div class="workcnt">Lorem ipsum dolor sit amet.</div>
+            </div>
+          </div>
+          <div class="works b">
+            <img id="work1" src="./pic1/logo-work-2.png" alt="" />
+
+            <div class="workdes">
+              <div class="worktitle">works title2</div>
+              <div class="workcnt">Lorem ipsum dolor sit amet.</div>
+            </div>
+          </div>
+          <div class="works c">
+            <img id="work1" src="./pic1/logo-work-3.png" alt="" />
+
+            <div class="workdes">
+              <div class="worktitle">works title3</div>
+              <div class="workcnt">Lorem ipsum dolor sit amet.</div>
+            </div>
+          </div>
+        </article>
+        <article id="self">
+          <div class="articletitle">about 沒屆期</div>
+          <img src="./pic1/portrait-1804963_1920.png" alt="" />
+          <div class="self">具有八年的網頁開發以及介面設計經驗，在 Github 上參與數個開源專案，熟悉原生 JavaScript EM6 開發，以及 VueJS, reactJS 等前端框架。 盡為受。幾業本造意當子二，方火動李方然他。住小科登務如卻。後洋一如線達告子喜港友變目不族風西排書終小學：年辦行中夫輪中詩的國、組上會隨可冷灣的進和有是不信使成因給？
+
+
+作而上不選現該時業、公準間在持我天本見連國問轉技雜和據果股會們病觀利學……子照自充則生好國夠用原行增發狀難樓新起為對時我生比：使色最交傳，的設學，作夠門友調管更張奇了覺有結畫會單公！
+          </div>
+        </article>
+      </main>
+      <footer>@2017媒介期.All Right Reservered</footer>
+    </div>
+  </body>
+</html>
