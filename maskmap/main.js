@@ -70,7 +70,7 @@ function refreshWrap(towns) {
   for (let item of data[currentCounty][towns]) {
     let table = getTable(item.properties.available);
     pharmacyWrap.innerHTML += `
-      <div class="pharmacy" data-lat="${
+      <div id="${item.geometry.coordinates[1]},${item.geometry.coordinates[0]}" class="pharmacy" data-lat="${
         item.geometry.coordinates[1]
       }" data-lnt="${item.geometry.coordinates[0]}">
         <div>${item.properties.name}</div>
@@ -177,6 +177,10 @@ async function zoomMap(crds) {
       item.geometry.coordinates[1] == crds[0] &&
       item.geometry.coordinates[0] == crds[1]
     ) {
+      let div = document.createElement("div");
+      div.style.color = "red";
+      div.style.fontSize = "30px";
+      div.innerHTML = `<a href="#${item.geometry.coordinates[1]},${item.geometry.coordinates[0]}"><i class="fa-solid fa-house-chimney-medical"></i></a>`;
       let marker = new AdvancedMarkerView({
         map: map,
         position: {
@@ -184,12 +188,14 @@ async function zoomMap(crds) {
           lng: item.geometry.coordinates[0],
         },
         title: item.properties.name,
+        content: div,
       });
+
     } else {
       let div = document.createElement("div");
-      div.style.color = "red";
+      div.style.color = "blue";
       div.style.fontSize = "30px";
-      div.innerHTML = '<i class="fa-solid fa-house-chimney-medical"></i>';
+      div.innerHTML = `<a href="#${item.geometry.coordinates[1]},${item.geometry.coordinates[0]}"><i class="fa-solid fa-house-chimney-medical"></i></a>`;
       let marker = new AdvancedMarkerView({
         map: map,
         position: {
