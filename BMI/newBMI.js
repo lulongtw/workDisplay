@@ -68,16 +68,16 @@ function checked(){
 	let w_value = parseInt(weight.value);
 	if (!h_value || h_value>300 || h_value<=0){
 		height.type="text"//每次都忘
-		height.value = "他媽給我"
+		height.value = "請輸入"
 		if (h_value>300 || h_value<=0){
-			height.value = "姚明也沒超過300"
+			height.value = "姚明也沒超過300公分"
 		}
 	}
 	if (!w_value || w_value>300 || w_value<=0){	
 		weight.type="text"
 		weight.value = "認真輸入"
-		if (w_value>300 || w_value<=0){
-			weight.value = "過300你認真?"
+		if (w_value>500 || w_value<=0){
+			weight.value = "體重半噸你認真?"
 		}
 	}
 	if (h_value&&w_value){
@@ -106,7 +106,7 @@ function getRemarkandColor(bmi){
 		case bmi>35 && bmi <=40:
 			return ["中度肥胖","var(--o3)"]
 		case bmi >40 :
-			return ["嚴重優秀","var(--o4)"]
+			return ["嚴重肥胖","var(--o4)"]
 		}
 }
 function getTime(){
@@ -162,7 +162,7 @@ function delSingle(e){
 }
 
 function delAll(){
-	let response = confirm("刪除全部，你確?");
+	let response = confirm("確定刪除全部?");
 	if (response){
 		data = [];
 		refreshMain(data);
