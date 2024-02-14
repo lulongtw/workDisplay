@@ -1,34 +1,37 @@
 .wrap{
-    width:min(80%,400px);
-    margin:30px auto
+  width:min(80%,500px);
+  margin:0 auto
 }
+
 .inputWrap{
-    width:80%;;
-    margin:0 auto;
-    
+  width:70%;
+  margin:0 auto;
 }
 
-:root{
-    --bl:gray;
-}
-
-.main{
-    padding:15px;
-    border:1px solid var(--bl);
-    border-radius:10px
-}
-.name{
-    text-align: center;
-    margin-bottom: 10px;
+.room{
+  padding:10px;
+  border:1px solid gray;
+  border-radius: 10px;
 
 }
-.dialoage{
-    border-bottom: 1px solid var(--bl);
-    display:flex;
-    align-items: center;
-    gap:10px;
-    padding:10px
+.chat{
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding:20px;
+  border-bottom: 1px solid gray;
+  gap:10px;
 }
-.me{
-    flex-direction: row-reverse;
+.other{
+  flex-direction:row-reverse
 }
+.time{
+  color:gray;
+  font-size: 10px;
+  text-align: right;
+}
+.other .time{
+  text-align: left;
+}
+
+

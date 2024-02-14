@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="room">
+    <div class="chat" v-for="item in reversedData">
+      <div class="content">
+        {{item.user}} 說:{{item.text}}
+      </div>
+      <div class="pic">
+        <img :src="'https://picsum.photos/id/'+item.idx+'/50'" alt="">
+      </div>
+    </div>
+  </div>
+  <script>
+    let time = new Date()
+  </script>
+</body>
+</html>
