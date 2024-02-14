@@ -1,10 +1,9 @@
-import "./del.css";
-//使用npm要import引入路徑  不能直接在src上寫程式內部路徑
-import clock from "./assets/icons_clock.png"
-import pin from   "./assets/icons_pin.png"
-import phone from   "./assets/icons_phone.png"
-import tag from  "./assets/icons_tag.png"
-import mark from "./assets/icons_down_blue.png"
+
+let clock = "./assets/icons_clock.png"
+let  pin =   "./assets/icons_pin.png"
+let  phone =  "./assets/icons_phone.png"
+let tag =  "./assets/icons_tag.png"
+let  mark = "./assets/icons_down_blue.png"
 
 
 
@@ -117,7 +116,12 @@ function refreshMain(dist, page) {
       div.style.top = e.pageY + "px";
     };
   })
-
+  let clickForMore = document.querySelectorAll(".ticket");
+  clickForMore.forEach(item=>{
+    if(item.textContent == "點我更多"){
+      item.style.cursor = "pointer"
+    }
+  })
 }
 window.onclick = (e) => {
   if (e.target.className != "ticket") {

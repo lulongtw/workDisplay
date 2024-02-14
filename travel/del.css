@@ -167,6 +167,9 @@ main{
 .pages>span{
   margin:0 3px;
 }
+.pages>span:hover,.prev,.next{
+  cursor:pointer
+}
 footer{
   background-color: rgb(17, 0, 255);
   color:white;
