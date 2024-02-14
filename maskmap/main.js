@@ -3,6 +3,7 @@ let countySelector = document.querySelector("[name='county']");
 let townSelector = document.querySelector("[name='town']");
 let pharmacyWrap = document.querySelector(".pharmacyWrap");
 let main = document.querySelector("main");
+let map
 
 async function getData() {
   try {
@@ -155,8 +156,11 @@ function getDataset(elm){
   return [elm.parentNode.dataset.lat,elm.parentNode.dataset.lnt]
   //要return elm.parentNode 而不是elm而已  因為檢查是檢查e.parerntNode
 }
-
-
+function zooming(lat,lng){
+  let center = new google.maps.LatLng(lat, lng);
+  map.setCenter(center);
+  map.setZoom(18);
+}
 
 async function zoomMap(crds) {
   let currentCounty = countySelector.value;
@@ -166,7 +170,7 @@ async function zoomMap(crds) {
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
 
-  let map = new Map(document.querySelector("main"), {
+  map = new Map(document.querySelector("main"), {
     zoom: 18,
     center: { lat: Number(crds[0]), lng: Number(crds[1]) },
     mapId: "DEMO_MAP_ID",
@@ -181,6 +185,9 @@ async function zoomMap(crds) {
       div.style.color = "red";
       div.style.fontSize = "30px";
       div.innerHTML = `<a href="#${item.geometry.coordinates[1]},${item.geometry.coordinates[0]}"><i class="fa-solid fa-house-chimney-medical"></i></a>`;
+      div.onclick = ()=>{
+        zooming(item.geometry.coordinates[1],item.geometry.coordinates[0])
+      }
       let marker = new AdvancedMarkerView({
         map: map,
         position: {
@@ -196,6 +203,9 @@ async function zoomMap(crds) {
       div.style.color = "blue";
       div.style.fontSize = "30px";
       div.innerHTML = `<a href="#${item.geometry.coordinates[1]},${item.geometry.coordinates[0]}"><i class="fa-solid fa-house-chimney-medical"></i></a>`;
+      div.onclick = ()=>{
+        zooming(item.geometry.coordinates[1],item.geometry.coordinates[0])
+      }
       let marker = new AdvancedMarkerView({
         map: map,
         position: {
@@ -214,7 +224,7 @@ async function refreshMap(lst) {
   const { Map } = await google.maps.importLibrary("maps");
   const { AdvancedMarkerView } = await google.maps.importLibrary("marker");
 
-  let map = new Map(document.querySelector("main"), {
+  map = new Map(document.querySelector("main"), {
     zoom: 15,
     center: {
       lat: lst[0].geometry.coordinates[1],
@@ -226,7 +236,10 @@ async function refreshMap(lst) {
     let div = document.createElement("div");
     div.style.color = "red";
     div.style.fontSize = "30px";
-    div.innerHTML = '<i class="fa-solid fa-house-chimney-medical"></i>';
+    div.innerHTML = `<a href="#${item.geometry.coordinates[1]},${item.geometry.coordinates[0]}"><i class="fa-solid fa-house-chimney-medical"></i></a>`;
+    div.onclick = ()=>{
+      zooming(item.geometry.coordinates[1],item.geometry.coordinates[0])
+    }
     let marker = new AdvancedMarkerView({
       map: map,
       position: {
@@ -238,3 +251,4 @@ async function refreshMap(lst) {
     });
   }
 }
+
