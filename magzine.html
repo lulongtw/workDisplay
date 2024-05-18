@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/33d145f0f9.js" crossorigin="anonymous"></script>
+  <title>Document</title>
+  <style>
+    *{
+      margin:0;padding:0;
+      box-sizing:border-box;
+     
+      letter-spacing:0.5px;
+      ;/*3小設1.1rem那個下面的quote就跟計算機圖片一樣高了= =到底*/
+      
+    }
+    body{
+      background-color: rgb(0, 47, 71);
+      color:white;
+    }
+    #mag{
+      display:grid;
+      grid-template-columns:1fr min(900px,95%) 1fr
+      /**/
+    }
+    header,nav,main{
+      grid-column:2;
+    }
+    header{
+      text-align:center;
+      color:red;
+      font-size:1.3rem;
+      display:grid;
+      gap:20px;
+    
+    }
+    img{
+      width:100%;
+      object-fit:cover;
+    }
+    #title{
+      font-weight:800;
+      font-size:3rem
+    }
+    nav{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      align-items:center;/*grid也可以justify align*/
+      margin:20px 0;
+    }
+    #author{
+      grid-column:1;
+    }
+    #data{
+      color:grey;
+    }
+    #navs{
+      grid-column:2;
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      font-size:5.3rem;
+      color:white;
+      align-items:center;
+      gap:20px;
+    }
+    a{
+      text-decoration: none;
+      color:white;
+    }
+ 
+    #text{
+      column-width:250px;/*太小嚇鼠倫*/
+      text-align:justify;
+      font-size:1rem;
+    }
+    #text::first-letter{
+      color:red;
+      font-size:50px;
+      float:left;
+      margin-right:15px;
+      text-align:center;
+      line-height:50px;
+    }
+    .quote{
+      font-size:1.4rem;/*這個字體大小是讓內容剛好可以撐到上下滿版*/
+      color:aquamarine;/*所以下面的quote可以和左邊一樣高*/
+      text-align:center;
+      
+    }
+    hr{
+      margin:20px 0;
+      border:1px solid grey;
+    }
+
+    #historyandimgs{
+      margin:20px 0;
+      display:grid;
+      grid-template-columns:1fr 2fr;
+      column-gap:20px;
+      
+    }
+    #history{
+      grid-column:1;
+      
+ 
+    }
+    .historytitle{
+      color:aquamarine;
+      font-size:1.5rem;
+      margin-top:25px;
+    }
+    .historytext{
+      font-size:1rem;
+    }
+
+    #imgs{
+      grid-column:2;
+      display:grid;
+      grid-template-columns:2fr 1fr;
+      align-items:center;
+      gap:10px;
+    }
+    #one{
+      grid-column:span 2;
+    }
+    #two{
+      grid-column:1/2
+    }
+    #three{
+      grid-column:1/4
+    }
+    @media only screen and (max-width:720px){
+      #imgs{
+        grid-template-columns:1fr;
+        gap:0;
+        row-gap:20px;
+      }
+      #two,.quote{
+        grid-column:1;
+      }
+    }
+    @media only screen and (max-width:600px){
+      #historyandimgs{
+        grid-template-columns:1fr;
+        row-gap:20px;
+      }
+      #imgs{
+        grid-column:1;
+      }
+    }
+  
+  </style>
+</head>
+<body>
+  <div id="mag">
+    <header>
+      <img src="https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png" alt="" width="600" height="400"/>
+      <div id="title">OUR NEW CURRICULUM</div>
+      <div id="smalltitle">Our efforts to restructure our curriculum with a more project-based focus</div>
+    </header>
+    <nav>
+      <div id="author">
+        <div id="by">By freecodecamp</div>
+        <div id="data">March 7, 2019</div>
+      </div>
+      <div id="navs">
+        <a href="" target="_blank"><i class="fa-solid fa-poo"></i></a>
+        <a href="" target="_blank"><i class="fa-solid fa-hippo"></i></a>
+        <a href="" target="_blank"><i class="fa-brands fa-docker"></i></a>
+        <a href="" target="_blank"><i class="fa-regular fa-thumbs-down"></i></a>
+        <a href="" target="_blank"><i class="fa-brands fa-shopify"></i></a>
+      </div>
+    </nav>
+    <main>
+      <div id="text">
+        Soon the freeCodeCamp curriculum will be 100% project-driven learning. Instead of a series of coding challenges, you'll learn through building projects - step by step. Before we get into the details, let me emphasize: we are not changing the certifications. All 6 certifications will still have the same 5 required projects. We are only changing the optional coding challenges.
+
+        After years - years - of pondering these two problems and how to solve them, I slipped, hit my head on the sink, and when I came to I had a revelation! A vision! A picture in my head! A picture of this! This is what makes time travel possible: the flux capacitor!
+        
+        It wasn't as dramatic as Doc's revelation in Back to the Future. It just occurred to me while I was going for a run. The revelation: the entire curriculum should be a series of projects. Instead of individual coding challenges, we'll just have projects, each with their own seamless series of tests. Each test gives you just enough information to figure out how to get it to pass. (And you can view hints if that isn't enough.)
+        
+        <div class="quote"><hr/>The entire curriculum should be a series of projects <hr/></div>
+        
+        No more walls of explanatory text. No more walls of tests. Just one test at a time, as you build up a working project. Over the course of passing thousands of tests, you build up projects and your own understanding of coding fundamentals. There is no transition between lessons and projects, because the lessons themselves are baked into projects. And there's plenty of repetition to help you retain everything because - hey - building projects in real life has plenty of repetition.
+        
+        The main design challenge is taking what is currently paragraphs of explanation and instructions and packing them into a single test description text. Each project will involve dozens of tests like this. People will be coding the entire time, rather than switching back and forth from "reading mode" to "coding mode".
+        
+        Instead of a series of coding challenges, people will be in their code editor passing one test after another, quickly building up a project. People will get into a real flow state, similar to what they experience when they build the required projects at the end of each certification. They'll get that sense of forward progress right from the beginning. And freeCodeCamp will be a much smoother experience.
+      </div>
+
+      <div id="historyandimgs">
+
+        <div id="history">
+          <div class="historytitle">A Brief History</div>
+          <div class="historytext">Of the Curriculum</div>
+          <div class="historytitle">V1 - 2014</div>
+          <div class="historytext">We launched freeCodeCamp with a simple list of 15 resources, including Harvard's CS50 and Stanford's Database Class.</div>
+          <div class="historytitle">2015</div>
+          <div class="historytext">We added interactive algorithm challenges.</div>
+          <div class="historytitle">2016</div>
+          <div class="historytext">We added our own HTML+CSS challenges (before we'd been relying on General Assembly's Dash course for these).</div>
+          <div class="historytitle">2017</div>
+          <div class="historytext">We expanded the curriculum to 3 certifications, including Front End, Back End, and Data Visualization. They each had 10 required projects, but only the Front End section had its own challenges. For the other certs, we were still using external resources like Node School.
+
+          </div>
+          <div class="historytitle">2018</div>
+          <div class="historytext">We added the back end and data visualization challenges.</div>
+          <div class="historytitle">2019</div>
+          <div class="historytext">We launched 6 new certifications to replace our old ones. This was the biggest curriculum improvement to date.</div>
+        </div>
+
+        <div id="imgs">
+          <img id="one" src="https://cdn.freecodecamp.org/testable-projects-fcc/images/random-quote-machine.png" alt="" height="400" width="400"/>
+          <img id="two" src="https://cdn.freecodecamp.org/testable-projects-fcc/images/calc.png" alt="" height="400"  width="400"/>
+          <div class="quote"><hr/>The millions of people who are learning to code through freeCodeCamp will have an even better resource to help them learn these fundamentals.<hr/></div>
+          <img id="three" src="https://cdn.freecodecamp.org/testable-projects-fcc/images/survey-form-background.jpeg" alt="" height="400"  width="400"/>
+
+        </div>
+
+      </div>
+      
+   
+    </main>
+  </div>
+</body>
+</html>

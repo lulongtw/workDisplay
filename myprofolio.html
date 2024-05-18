@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/33d145f0f9.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      nav {
+        height: 70px;
+        background-color: red;
+        display: flex;
+        justify-content: flex-end;
+        gap: 50px;
+        padding-right: 50px;
+        color: white;
+        font-size: 1.5rem;
+        align-items: center;
+        position: fixed;
+        z-index: 1;
+        width: 100%;
+        text-align: center;
+      }
+      a {
+        text-decoration: none;
+        color: white;
+      }
+      section {
+        height: calc(100vh - 70px);
+        background-color: rgb(55, 56, 67);
+        position: relative;
+        border: 1px solid white;
+      }
+      #about {
+        height: 100vh;
+        padding-top: 70px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .fcc {
+        width: 100px;
+        object-fit: cover;
+      }
+      /*
+            .mid{
+        width:50%;
+        height:50%;
+        margin:auto;
+        position:absolute;
+        top:0;bottom:0;right:0;left:0;
+        text-align:center;
+      }
+      */
+
+      .hey {
+        font-size: 5rem;
+        font-weight: 800;
+      }
+      .web {
+        font-size: 2rem;
+        font-style: italic;
+        color: red;
+      }
+      #work {
+        padding: 10px;
+        padding-top: 100px;
+        padding-bottom: 50px;
+        background-color: rgb(83, 83, 195);
+        height: 100%;
+        scroll-margin-top:70px;
+      }
+      .intro {
+        font-size: 2.5rem;
+        font-weight: 800;
+        border-bottom: 2px solid white;
+        width: min(90%, 600px);
+        margin: 0 auto;
+        margin-bottom: 20px;
+        text-align: center;
+        color: white;
+      }
+      #gallery {
+        height: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+      }
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+      .cntn {
+        padding: 10px 20px;
+        background-color: rgb(46, 46, 78);
+        margin-top: -5px;
+        text-align: center;
+      }
+      #contact {
+        color: white;
+        text-align:center;
+      
+      }
+      .flex{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height:88%;
+        gap:20px;
+      }
+      .lets{
+        font-size:3rem;
+        font-weight:800;
+      }
+      .how{
+        font-style: italic;
+      }
+      #cnts{
+        display:flex;
+        gap:30px;
+        justify-content: center;
+        align-items:center;
+        font-size:1.3rem;
+        flex-wrap:wrap;
+       
+      }
+      .i{
+         box-shadow:5px 5px 5px black;
+      }
+      .footer{
+        height:12%;
+        padding:0 10px;
+        border-top:3px solid red;
+        display:grid;
+        grid-template-columns:8fr 5fr;
+        grid-template-rows: 1fr;
+        justify-content: center;
+        align-items: center;
+      }
+      .create,.fcc{
+        grid-column:2;
+      }
+      .show{
+    
+        width:100px;
+        padding:10px ;
+        background-color:  rgb(46, 46, 78);
+        margin:10px auto
+      }
+ 
+      .ninja{
+        color:transparent;
+        transition:color 0.3s
+      }
+      .cng{
+        color:red;
+      }
+  
+      @media only screen and (max-width:1200px){
+        #gallery{
+          grid-template-columns:1fr 1fr;
+        }
+      }
+      @media only screen and (max-width:700px){
+                #gallery{
+          grid-template-columns:1fr;
+        }
+      } 
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="#about"><div class="navs">about</div></a>
+      <a href="#work"><div class="navs">work</div></a>
+      <a href="#contact"><div class="navs">contact</div></a>
+    </nav>
+    <main>
+      <section id="about">
+        <div class="hey">hey I am mimin</div>
+        <div class="web">a web developer</div>
+      </section>
+
+      <section id="work">
+        <div class="intro">these are some of my works</div>
+        <img src>
+        <div id="gallery">
+          <a href="#" target="_blank" onclick="event.preventDefault()"
+            ><img
+              width="600"
+              height="400"
+              src="https://cdn.freecodecamp.org/testable-projects-fcc/images/tribute.jpg"
+            />
+            <div class="cntn">
+              <span class="ninja">&lt</span>tribute<span class="ninja"
+                >/&gt</span
+              >
+            </div>
+          </a>
+          <a href="#" onclick="event.preventDefault()" target="_blank" 
+            ><img
+              width="600"
+              height="400"
+              src="https://cdn.freecodecamp.org/testable-projects-fcc/images/random-quote-machine.png"
+            />
+            <div class="cntn">
+              <span class="ninja">&lt</span>tribute<span class="ninja"
+                >/&gt</span
+              >
+            </div>
+          </a>
+          <a href="#" onclick="event.preventDefault()" target="_blank"
+            ><img
+              width="600"
+              height="400"
+              src="https://cdn.freecodecamp.org/testable-projects-fcc/images/calc.png"
+            />
+            <div class="cntn">
+              <span class="ninja">&lt</span>tribute<span class="ninja"
+                >/&gt</span
+              >
+            </div>
+          </a>
+          <a href="#" onclick="event.preventDefault()" target="_blank"
+            ><img
+              width="600"
+              height="400"
+              src="https://cdn.freecodecamp.org/testable-projects-fcc/images/map.jpg"
+            />
+            <div class="cntn">
+              <span class="ninja">&lt</span>tribute<span class="ninja"
+                >/&gt</span
+              >
+            </div>
+          </a>
+          <a href="#" onclick="event.preventDefault()" target="_blank"
+            ><img
+              width="600"
+              height="400"
+              src="https://cdn.freecodecamp.org/testable-projects-fcc/images/wiki.png"
+            />
+            <div class="cntn">
+              <span class="ninja">&lt</span>tribute<span class="ninja"
+                >/&gt</span
+              >
+            </div>
+          </a>
+          <a href="#" onclick="event.preventDefault()" target="_blank"
+            ><img
+              width="600"
+              height="400"
+              src="https://cdn.freecodecamp.org/testable-projects-fcc/images/tic-tac-toe.png"
+            />
+            <div class="cntn">
+              <span class="ninja">&lt</span>tribute<span class="ninja"
+                >/&gt</span
+              >
+            </div>
+          </a>
+        </div>
+
+        <a href="#" onclick="event.preventDefault()" target="_blank"><div class="show">show all &gt</div></a>
+      </section>
+
+      <section id="contact">
+        <div class="flex">
+          <div class="lets">lets work together</div>
+          <div class="how">how do you like tou coffee?</div>
+          <div id="cnts">
+            <a href="" target="_blank"><div class="cnt"><i class="fa-solid fa-eye"></i>Facebook</div></a>
+            <a href="" target="_blank"><div class="cnt"><i class="fa-solid fa-tree"></i>acebook</div></a>
+            <a href="" target="_blank"><div class="cnt"><i class="fa-solid fa-paper-plane"></i>Facebook</div></a>
+            <a href="" target="_blank"><div class="cnt"><i class="fa-brands fa-stack-overflow"></i>Facebook</div></a>
+            <a href="" target="_blank"><div class="cnt"><i class="fa-brands fa-kickstarter"></i>Facebook</div></a>
+          </div>
+        </div>
+
+        <div class="footer">
+       
+          <div class="this">
+            **This is just a fake portfolio. All the projects and contact
+            details given are not real.
+          </div>
+          <div class="create">@createfor          <img
+            class="fcc"
+            src="https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg"
+          /></div>
+
+        </div>
+      </section>
+    </main>
+    <script>
+      window.addEventListener("load",()=>{
+        let gay = document.getElementById("gallery")
+        let cntns = gay.getElementsByTagName("a")
+        for (let i=0;i<cntns.length;i++){
+          cntns[i].addEventListener("mouseover",tgle.bind(cntns[i]))
+          cntns[i].addEventListener("mouseout",tgle.bind(cntns[i]))
+        }
+      })
+      function tgle(){
+        let ninjas = this.getElementsByClassName("ninja")
+        ninjas[0].classList.toggle("cng")
+        ninjas[1].classList.toggle("cng")
+      }
+    </script>
+  </body>
+</html>
