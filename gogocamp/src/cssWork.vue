@@ -1,10 +1,10 @@
 <script setup>
   import {onMounted} from "vue";
-  let hrefLink = ["BMI/newBMI.html","rws.html","chatRoomDist/dist/index.html","maskmap/index.html","svgpainter.html","tictactoe.html","travel/del.html"]
-  let picLink = ["BMIPic.png","RWSPic.png","chatRoomPic.png","maskMapPic.png","painterPic.png","tictactoePic.png","travelPic.png"]
-  let gitLink = ["tree/main/BMI","blob/main/rws.html","tree/main/chatroom","tree/main/maskmap","blob/main/svgpainter.html","blob/main/tictactoe.html","tree/main/travel"]
-  let title = ["BMI記錄器","RWS","聊天室","口罩地圖","向量繪圖","井字遊戲","旅遊景點"];
-  let des = ["localStorage紀錄資料","單純RWS網頁","vuex串接firsebase資料庫","串接googlemapAPI","svg繪圖","使用redux與react","串接高市政府API"]
+  let hrefLink = ["rws.html","balancesheet.html","scroll.html","magzine.html","skyline.html","myprofolio.html",'vueCssDist/index.html']
+  let picLink = ["RWSPic.png",'balansheetPic.png','jstechPic.png','magzinPic.png','skylinePic.png','prepolioPic.png','vueCss.png']
+  let gitLink = ["blob/main/rws.html","blob/main/balancesheet.html","blob/main/scroll.html","blob/main/magzine.html","blob/main/skyline.html","blob/main/myprofolio.html"," tree/main/vueCssDist"]
+  
+
 </script>
 
 <template>
@@ -16,8 +16,8 @@
       :style="`background-image: url('https://lulongtw.github.io/workDisplay/snapshot/${item}');`"
     >
     <a class="description" :href="`https://github.com/lulongtw/workDisplay/${gitLink[key]}`" target="_blank">
-      <div class="text">{{title[key]}}</div>
-      <div class="text">&lt;{{des[key]}}/&gt;</div>
+      <div class="text">{{'切版練習'+key}}</div>
+      <div class="text">&lt;{{'切版練習'+key+'gitlink'}}/&gt;</div>
     </a>
   </a>
   </div>

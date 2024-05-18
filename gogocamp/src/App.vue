@@ -1,6 +1,7 @@
 <script setup>
 import com from "./com.vue";
-import work from "./work.vue";
+import otherWork from "./work.vue";
+import cssWork from "/.cssWord.vue";
 </script>
 
 <template>
