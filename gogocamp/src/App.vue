@@ -10,7 +10,7 @@ import cssWork from "./cssWork.vue";
     :content="`陳俊嘉，男，<br>
     中正大學傳播系畢業<br>
   在影視幕後工作10年後<br>
-  轉職軟體工程師成為下一個工作的理想目標`"
+  軟體工程師成為下一個工作的理想目標`"
   ></com>
 
   <com
