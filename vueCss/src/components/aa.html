@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title><style>
+        .con {
+            border: 1px solid black;
+            display: grid;
+            grid-template-columns: 50px 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-auto-rows: minmax(0, auto); /* 设置一个固定值，这里使用了 minmax(0, auto) */
+        }
+        .a {
+            grid-column: 1;
+            grid-row: 1;
+        }
+        .b {
+            grid-column: 2;
+            grid-row: 1;
+            background-color: blue;
+        }
+        .c {
+            grid-column: 2;
+            grid-row: 2;
+            background-color: red;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="con">
+        <div class="a">qq</div>
+        <div class="b">Documentation</div>
+        <div class="c">Got stuck? Ask your question on Vue Land, oGot stuck? Ask your question on Vue Land, oGot stuck? Ask your question on Vue Land, oGot stuck? Ask your question on Vue Land, oGot stuck? Ask your question on Vue Land, our official Discord server, or StackOverflow. You should also subscribe to our mailing list and follow the official @vuejs twitter account for latest news in the Vue world.</div>
+    </div>
+</body>
+</html>

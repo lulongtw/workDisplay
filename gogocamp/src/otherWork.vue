@@ -2,10 +2,10 @@
   import {onMounted} from "vue";
   let hrefLink = ["BMI/newBMI.html","chatRoomDist/dist/index.html","maskmap/index.html","svgpainter.html","tictactoe.html","travel/del.html",'fegoShopDist/index.html']
   let picLink = ["BMIPic.png","chatRoomPic.png","maskMapPic.png","painterPic.png","tictactoePic.png","travelPic.png",'fegoShopDist.png']
-  let gitLink = ["tree/main/BMI","tree/main/chatroom","tree/main/maskmap","blob/main/svgpainter.html","blob/main/tictactoe.html","tree/main/travel",'tree/main/fegoShopDist']
+  let gitLink = ["tree/main/BMI","tree/main/chatroom","tree/main/maskmap","blob/main/svgpainter.html","blob/main/tictactoe.html","tree/main/travel",'tree/main/fegoShop']
   let title = ["BMI記錄器","聊天室","口罩地圖","向量繪圖","井字遊戲","旅遊景點",'肥狗商城'];
   let des = ["localStorage紀錄資料","vuex串接firsebase資料庫","串接googlemapAPI","svg繪圖","使用redux與react","串接高市政府API",'電商網頁']
-
+ // https://github.com/lulongtw/practice/tree/main/hex/vue/%E5%95%86%E5%9F%8E/%E9%A0%88%E4%BD%90%E8%83%BD%E4%B9%8E%E5%95%86%E5%9F%8E
 </script>
 
 <template>
