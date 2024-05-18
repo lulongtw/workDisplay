@@ -6,6 +6,7 @@
   import {showModal,hideModal,getData} from "@/functions.js";
   import LookDetailModal from "@/modal/lookDetailModal.vue"
   import * as yup from "yup"
+import { image } from "@vee-validate/rules";
 
   //  所有已分類商品資料
   let products = ref([]);
@@ -32,6 +33,7 @@
     }
   });
 
+
   let pages = computed(()=>{
     //運算當前選擇分類可以分成多少頁
     return Math.ceil(currentCategoryLength.value/2)
@@ -56,6 +58,39 @@
   )
   function lookDetail(item){
     currentItem.value = item
+  }
+
+  function checkLoaded(item){
+    let image = new Image();
+    image.src = item.imageUrl;
+    image.onload = ()=>{
+      return false
+    }
+    return true
+  }
+
+  let vSex = {
+    mounted(el,bind) {
+      el.style.backgroundImage = ""
+      el.classList.toggle('spinner')
+      let img = new Image();
+      img.src = bind.value.imageUrl;
+      img.onload = ()=>{
+        el.classList.toggle('spinner')
+        el.style.backgroundImage =  `url(${bind.value.imageUrl})`
+      }
+    },
+    updated:(el,bind)=>{
+      el.style.backgroundImage = ""
+      el.classList.toggle('spinner')
+      let img = new Image();
+      img.src = bind.value.imageUrl;
+      img.onload = ()=>{
+        el.classList.toggle('spinner')
+        el.style.backgroundImage =  `url(${bind.value.imageUrl})`
+      }
+ 
+    }
   }
 
   async function addToCart(item){
@@ -87,7 +122,12 @@
   <LookDetailModal :currentItem="currentItem"></LookDetailModal>
   <div class="productsWrap">
       <div  v-for="(item,idx) in currentShow" class="item">
-        <div class="pic"><img :src="item.imageUrl"></div>
+        <div class="pic">
+          <!-- <div v-if="checkLoaded(item)" class="spinner">da</div>
+          <img v-else :src="item.imageUrl"> -->
+          <!-- <img :src="item.imageUrl" v-sex="item"> -->
+          <div class="imageDiv" v-sex="item"></div>
+        </div>
         <div class="name">{{item.title}}</div>
         <div class="content">{{item.content}}</div>
         <div class="buttons">
@@ -112,6 +152,33 @@
 </nav>
 </template>
 <style scoped>
+  .spinner{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .spinner::after{
+    content:"";
+    width:50px;height:50px;
+    border:3px solid grey;
+    border-top :3px solid rgb(0, 0, 0);
+    border-radius: 100%;
+    animation: spin 1s infinite;
+  }
+  @keyframes spin{
+    to {transform:rotate(360deg)}
+  }
+  .imageDiv{
+    width:100%;
+    height:200px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius:30px;
+    border-radius:30px 0px 0px 0px;
+  
+  }
   .productsWrap{
     /* display:grid;
     grid-template-columns:1fr 1fr; */
@@ -134,7 +201,6 @@
     object-fit:cover;
     border-radius:30px;
     border-radius:30px 0px 0px 0px;
-    
   }
   .buttons{
     padding:10px;
