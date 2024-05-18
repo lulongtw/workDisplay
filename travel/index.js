@@ -14,7 +14,7 @@ let data = {};
 let navs = document.querySelectorAll(".nav");
 let mainTitle = document.querySelector(".mainTitle");
 let pages = document.querySelector(".pages");
-let currentPage = 8;
+let currentPage = 2;
 let currentDist = "岡山區";
 let prev = document.querySelector(".prev");
 let next = document.querySelector(".next");
@@ -29,11 +29,14 @@ lines[0].appendChild(img)
 window.onload = async () => {
   try {
     res = await axios.get("https://raw.githubusercontent.com/hexschool/KCGTravel/master/datastore_search.json");
-    res = res.data.data.XML_Head.Infos.Info;
-
+    console.log(res)
+    // res = res.data.data.XML_Head.Infos.Info;
+    res = res.data.result.records
+    console.log(res)
     for (let i=0;i<res.length;i++) {
 
-      let distName = codeToName(res[i].Zipcode);
+      // let distName = codeToName(res[i].Zipcode);
+      let distName = res[i].Zone
       if (!data[distName]) {
         data[distName] = [];
         data[distName].push(res[i]);
@@ -57,9 +60,9 @@ function refreshSelect() {
 }
 
 select.addEventListener("change", chooseDist);
-
+////////////////
 function chooseDist(e) {
-  refreshMain(e.target.value, 8);
+  refreshMain(e.target.value, 2);
 }
 
 function refreshMain(dist, page) {
@@ -69,8 +72,8 @@ function refreshMain(dist, page) {
   mainTitle.textContent = dist;
   distWrap.innerHTML = "";
   let notFreeIdx = [];
-
-  for (let i = page - 8; i < page && i < data[dist].length; i++) {
+////////////////////
+  for (let i = page - 2; i < page && i < data[dist].length; i++) {
     let ticketInfo;
     if (
       data[dist][i].Ticketinfo == "" ||
@@ -81,15 +84,16 @@ function refreshMain(dist, page) {
     } else {
       ticketInfo = "點我更多";
       notFreeIdx.push({
-        idx: i % 8,
+        idx: i % 2,
         info: data[dist][i].Ticketinfo,
       });
     }
+    //<div class="dist">${codeToName(data[dist][i].Zipcode)}</div>
     distWrap.innerHTML += `
     <div class="view">
     <div class="pic" style="background-image:url(${data[dist][i].Picture1})">
       <div class="picName">${data[dist][i].Name}</div>
-      <div class="dist">${codeToName(data[dist][i].Zipcode)}</div>
+      <div class="dist">${data[dist][i].Zone}</div>
     </div>
     <div class="des">
       <div class="smallPic"><img src="${clock}"></div>
@@ -141,7 +145,7 @@ window.onclick = (e) => {
 navs.forEach(item=>{
   let a = item.textContent;
   item.onclick = ()=>{
-    refreshMain(a, 8);
+    refreshMain(a, 2);
   }
 })
 
@@ -157,7 +161,9 @@ navs.forEach(item=>{
 
 function refreshPages(dist) {
   pages.innerHTML = "";
-  let pageAmouts = Math.ceil(data[dist].length / 8);
+  // console.log(dist)
+  // console.log(data)
+  let pageAmouts = Math.ceil(data[dist].length / 2);
   for (let i = 0; i < pageAmouts; i++) {
     let span = document.createElement("span");
     span.textContent = i+1;
@@ -171,21 +177,21 @@ function refreshPages(dist) {
   }
 }
 function jumpToPage(dt, pg) {
-  refreshMain(dt, pg * 8);
-  currentPage = pg * 8;
+  refreshMain(dt, pg * 2);
+  currentPage = pg * 2;
 }
 
 prev.onclick = () => {
-  currentPage -= 8;
-  if (currentPage <= 8) {
-    currentPage = 8;
+  currentPage -= 2;
+  if (currentPage <= 2) {
+    currentPage = 2;
   }
   refreshMain(currentDist, currentPage);
 };
 next.onclick = () => {
-  currentPage += 8;
-  if (currentPage / 8 > Math.ceil(data[currentDist].length / 8)) {
-    currentPage = Math.ceil(data[currentDist].length / 8) * 8;
+  currentPage += 2;
+  if (currentPage / 2 > Math.ceil(data[currentDist].length / 2)) {
+    currentPage = Math.ceil(data[currentDist].length / 2) * 2;
   }
   refreshMain(currentDist, currentPage);
 };
