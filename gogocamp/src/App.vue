@@ -1,87 +1,50 @@
 <script setup>
 import com from "./com.vue";
-import otherWork from "./work.vue";
-import cssWork from "/.cssWord.vue";
+import otherWork from "./otherWork.vue";
+import cssWork from "./cssWork.vue";
 </script>
 
 <template>
   <com
     :title="'自我介紹'"
     :content="`陳俊嘉，男，<br>
-狗派，巴哥最棒。<br>
-小時對未來抱持著悲觀的看法，<br>
-但隨著年齡的增長，<br>
-逐漸認識到悲觀樂觀僅僅是一種選擇，<br>
-端看解釋的角度而已，<br>
-老生常談的難過是一天，開心也是一天變成生活上的體悟。`"
+    中正大學傳播系畢業<br>
+  在影視幕後工作10年後<br>
+  轉職軟體工程師成為下一個工作的理想目標`"
   ></com>
+
   <com
-    :title="`為了成為軟體工程師，做過什麼努力？<br>若有具體作品請分享給我們。`"
-    :content="``"
-  ><template #product><work></work></template></com>
-  <com
-    :title="`如果參與這個訓練，會怎麼安排學習時間？`"
-    :content="`自從上次參加bootcamp失敗，<br>
-已經全職身份自學程式半年，<br>
-每天12個小時以上在圖書館，<br>
-未來迎接課程也是以這個步調調整`"
-  ></com>
-  <com
-    :title="`是否有想要加入的公司？為什麼想加入該公司？`"
+    :title="`css切版練習`"
     :content="`
-    <ul>
-      <li>精誠資訊 - 上市公司，體質良好，提供入職培訓angular，對新入職相對友善</li><br>
-      <li>Ocard - 新創公司，快速擴展中，用自建平台整合客戶的會員系統，經常性需要串接FB與Line，新技術匯流的地方</li><br>
-      <li>Papiin - 跟之前的工作相關，產業熟悉度高</li>  
-    </ul>
+    內容包含freecodecamp與六角的切版作業
     `"
-  ></com>
-  <com
-    :title="`請描述一件產生明顯負面情緒的經歷，如何處理該情緒？`"
-    :content="`有自學六角的課程，但因為課程內容部分已經過時2到3年，<br>
-結構與做法已經不一樣，要開始自己找現代做法的解答。<br><br>
-一開始對此相當反感，因為對該線上課程的期待是可以給我正確的答案，<br>
-但因為版本的關係，變成要多花心力去找正確答案，<br>
-一方面覺得多花時間，<br>
-一方面當時身邊又沒有人可以即時請教，無力感相當重。<br><br>
+  ><template #product><cssWork></cssWork></template></com>
 
-其實沒有特別的處理方式，就是離開座位喝杯水，<br>
-繼續google答案，因為問題就是擺在那邊，要往下走，<br>
-就是要動手去解決的。<br><br>
-
-事後想想，這種解決問題的過程，應該是工程師的日常吧?`"
-  ></com>
   <com
-    :title="`關於這份申請網頁，分享一個開發時的技術心得。`"
+    :title="`js與vue相關練習`"
+    :content="`內容包含六角課程以及彭彭YT練習`"
+  ><template #product><otherWork></otherWork></template></com>
+
+
+
+  <com
+    :title="`到目前為止的程式心得`"
     :content="`
-  網路上的範例會做，不代表真的會，<br>
-  真正的學習在於組合學過的知識，生成自己東西<br>
-  過程中把他們編進腦袋裡，才是真正的學習。<br>
+  寫程式就是在解決一連串的問題，<br>
+  而且結果會以一種很實際，不含糊，沒有餘地的方式給出相對於原因的回饋<br>
+  相較於其他環境中，充滿各種不同變數，跑來影響自己努力的結果<br>
+  我很喜歡程式給我說一得一，說二得二的感覺<br>
   `"
   ></com>
-  <com
-    :title="`請用簡短兩三句話，描述對你而言，最重要的一項人際交往原則。<br>`"
-    :content="`保持開放的態度看自己和別人，<br>
-不要小看別人，也不要小看自己<br>`"
-  ></com>
-  <com
-    :title="`從上次提出申請至今，多做了哪些努力？( 第一次申請不用回答 )`"
-    :content="`
-    <ul>
-    <li>完成FreeCodeCamp的RWD課程</li>
-    <li>彭彭yt的html,css,js,webpack,npm,react影片實做</li>
-    <li>六角的JS初階與進階課程</li>  
-    <li>vue的初階課程</li>
-    <li>目前在進行電商網站架構課程</li>
-    </ul>`"
-  ></com>
+
+
 
   <com
-    :title="`其他想要對我們說的事情？`"
+    :title="`其他小事`"
     :content="`<br>
-我習慣兩天做一次運動，運動完就去圖書館，<br>
+最近習慣兩天做一次運動，運動完就去圖書館學習程式，<br>
 每次運動完收操時會重複一段話：<br>
-我 陳俊嘉 生活在林口的高雄人，<br>
-未來一年內要轉職為全端工程師。<br>`"
+我 陳俊嘉 高雄人，<br>
+未來一年內要轉職為電腦工程師。<br>`"
   ></com>
 </template>

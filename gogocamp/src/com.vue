@@ -20,7 +20,7 @@ onMounted(() => {
           }
         })
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
     observer1.observe(wrap.value);
   }
@@ -52,8 +52,12 @@ onMounted(() => {
   <div ref="wrap" class="wrap">
     <div ref="titleCom" class="title" v-html="props.title">
     </div>
-    <slot name="product"></slot>
+    
     <div ref="contentCom" class="content" v-html="props.content">
+      
+    </div>
+    <div class="show">
+      <slot name="product"></slot>
     </div>
 
   </div>
@@ -71,18 +75,27 @@ onMounted(() => {
   font-size: 20px;
   opacity: 0;
   transition: opacity 0.5s;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   
 }
 .title {
   text-align: center;
   font-size: 30px;
   font-weight: 800;
+
+}
+.show{
+  width:100%;
 }
 .content {
-  width: 70%;
+
+  width: 100%;
   margin: 0 auto;
-  margin-top: 15%;
+  margin-top: 5%;
+  text-align:center
 
 }
 .title,.content{

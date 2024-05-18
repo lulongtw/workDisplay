@@ -1,10 +1,10 @@
 <script setup>
   import {onMounted} from "vue";
-  let hrefLink = ["BMI/newBMI.html","chatRoomDist/dist/index.html","maskmap/index.html","svgpainter.html","tictactoe.html","travel/del.html"]
-  let picLink = ["BMIPic.png","chatRoomPic.png","maskMapPic.png","painterPic.png","tictactoePic.png","travelPic.png"]
-  let gitLink = ["tree/main/BMI","tree/main/chatroom","tree/main/maskmap","blob/main/svgpainter.html","blob/main/tictactoe.html","tree/main/travel"]
-  let title = ["BMI記錄器","聊天室","口罩地圖","向量繪圖","井字遊戲","旅遊景點"];
-  let des = ["localStorage紀錄資料","vuex串接firsebase資料庫","串接googlemapAPI","svg繪圖","使用redux與react","串接高市政府API"]
+  let hrefLink = ["BMI/newBMI.html","chatRoomDist/dist/index.html","maskmap/index.html","svgpainter.html","tictactoe.html","travel/del.html",'fegoShopDist/index.html']
+  let picLink = ["BMIPic.png","chatRoomPic.png","maskMapPic.png","painterPic.png","tictactoePic.png","travelPic.png",'fegoShopDist.png']
+  let gitLink = ["tree/main/BMI","tree/main/chatroom","tree/main/maskmap","blob/main/svgpainter.html","blob/main/tictactoe.html","tree/main/travel",'tree/main/fegoShopDist']
+  let title = ["BMI記錄器","聊天室","口罩地圖","向量繪圖","井字遊戲","旅遊景點",'肥狗商城'];
+  let des = ["localStorage紀錄資料","vuex串接firsebase資料庫","串接googlemapAPI","svg繪圖","使用redux與react","串接高市政府API",'電商網頁']
 
 </script>
 
