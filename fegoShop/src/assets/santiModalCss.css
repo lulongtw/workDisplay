@@ -1,0 +1,24 @@
+.santiWrap{
+  display:grid;
+  grid-template-columns:1fr 2fr;
+  gap:30px;
+  padding:10px;
+}
+input,textarea{
+  width:100%;
+}
+.contentWrap{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.fatty{
+  grid-column:span 2;
+}
+.error{
+  border:1px solid red;
+}
+img{
+  width:100%;
+  object-fit:contain;
+}

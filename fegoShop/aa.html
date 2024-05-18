@@ -1,0 +1,260 @@
+<script setup>
+  import {ref,watch,computed,onMounted,inject,provide} from "vue";
+  import store from "@/store/store.js";
+  import {useRouter} from "vue-router";
+  import {Modal} from "bootstrap";
+  import {showModal,hideModal,getData} from "@/functions.js";
+  import {useField,useForm,defineRule,configure} from "vee-validate";
+  import { required } from '@vee-validate/rules';
+  import { localize } from '@vee-validate/i18n';
+
+  let data = ref([]);
+  let currentEdit = ref("");
+  let editItem = ref({});
+  let originalItem = ref({});
+  let newCouponData = ref({});
+  let showCreateCoupon = ref(false);
+  let currentPage = ref(store.state.currentPage);
+  let pagination = ref({});
+  let {handleSubmit,resetForm} = useForm();
+  let onSubmit = handleSubmit((val)=>{
+
+    let url = '/api/:api_path/admin/coupon';
+    let method = 'post';
+    val.due_date = new Date(val.due_date).getTime()/1000
+    let toSend = {
+      'data':val
+    };
+
+    store.dispatch('createCoupon',{url,method,toSend});
+    exitCreate()
+  })
+  
+  defineRule('required',required);
+  defineRule('onlyNum',(val)=>{
+    return val.split("").every(item=>{
+      return !isNaN(item)
+    })
+  });
+  configure({
+  generateMessage: localize('zh-tw', {
+    messages: {
+      required: '要填入',
+      onlyNum:'只有數字'
+    },
+  }),
+});
+  
+
+  let {value:nameVal,errorMessage:nameErr} = useField('title',"required");
+  let {value:codeVal,errorMessage:codeErr} = useField('code','required');
+  let {value:percentVal,errorMessage:percentErr} = useField('percent','required||onlyNum');
+  let {value:dateVal,errorMessage:dateErr} = useField('due_date','required');
+  let {value:ableVal,errorMessage:ableErr} = useField('is_enabled','');
+
+
+  onMounted(()=>{
+    let url = `/api/:api_path/admin/coupons?page=${currentPage.value}`;
+    let method = 'get'
+    store.dispatch('getCouponLst',{url,method})
+  })
+
+  watch(()=>store.state.couponLst,
+    (newVal)=>{
+      data.value = newVal.coupons;
+      pagination.value = newVal.pagination
+      data.value.forEach((item,idx,self)=>{
+        self[idx].due_date =  new Date(item.due_date*1000).toISOString().split("T")[0]
+      })
+  });
+
+  watch(()=>store.state.currentPage,
+    (newVal)=>{
+      currentPage.value = newVal
+    }
+  )
+  
+  function edit(item){
+    currentEdit.value = item.id;
+    editItem.value = item;
+    originalItem.value = JSON.parse(JSON.stringify(item))
+  }
+  function exitEdit(item){
+    let idx = data.value.indexOf(item);
+    data.value[idx] = originalItem.value
+    currentEdit.value = "";
+    editItem.value = "";
+  }
+  function sendEdit(item){
+    let url = `/api/:api_path/admin/coupon/${item.id}`;
+    let method = 'put';
+    item.due_date = new Date(item.due_date).getTime() / 1000
+    let toSend = {
+      'data':item
+    }
+    console.log(url,method,toSend)
+    store.dispatch('editCoupon',{url,method,toSend})
+    currentEdit.value = "";
+    editItem.value = "";
+  }
+  function del(item){
+    let url = `/api/:api_path/admin/coupon/${item.id}`;
+    let method = 'delete';
+    store.dispatch('deleteCoupon',{url,method})
+  }
+  function createCoupon(){
+    resetForm()
+    showCreateCoupon.value = true;
+
+  }
+  function sendCreate(){
+    let url = '/api/:api_path/admin/coupon';
+    let method = 'post';
+    newCouponData.value.due_date = new Date(newCouponData.value.due_date).getTime()/1000
+    let toSend = {
+      'data':newCouponData.value
+    };
+    store.dispatch('createCoupon',{url,method,toSend});
+    exitCreate()
+  }
+  function exitCreate(){
+    showCreateCoupon.value = false;
+    newCouponData.value = {}
+  }
+  function goPage(check,page){
+    if (check){
+      store.commit('renewCurrentPage',page);
+      let url = `/api/:api_path/admin/coupons?page=${page}`;
+      let method = 'get'
+      store.dispatch('getCouponLst',{url,method})
+    }else{
+      let stamp = new Date().getTime()
+      store.commit('renewMessages',{'message':'到底了，頂到肺了','stamp':stamp})
+    }
+    
+  }
+</script>
+
+<template>
+  <button @click="createCoupon" type="button" class="btn btn-primary">Primary</button>
+  <form @submit.prevent="onSubmit" >
+  <table>
+    <thead>
+      <tr>
+        <th>coupon名稱</th>
+        <th>優惠碼</th>
+        <th>折扣</th>
+        <th>過期日</th>
+        <th>啟用狀態</th>
+        <th>動作</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr v-if="showCreateCoupon">
+        <td><input :class="{'err':nameErr}" name="name" type="text" v-model="nameVal">
+          {{nameErr}}
+        </td>
+        <td><input :class="{'err':codeErr}" name="title" type="text" v-model="codeVal">
+          {{codeErr}}
+        </td>
+        <td><input :class="{'err':percentErr}" name="percent" type="text" v-model="percentVal">
+          {{percentErr}}
+        </td>
+        <td><input :class="{'err':dateErr}" name="due_date" type="date" v-model="dateVal">
+          {{dateErr}}
+        </td>
+        <td><input type="checkbox" name="is_enabled" :true-value="1" :false-value="0"  v-model="ableVal"></td>
+        <td>
+          <div>
+          <button  type="submit" class="btn btn-success"
+            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .25rem; --bs-btn-font-size: .75rem;">
+            create
+          </button>
+          <button @click="exitCreate" type="button" class="btn btn-success"
+            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .25rem; --bs-btn-font-size: .75rem;">
+            exit
+          </button>
+        </div>
+        </td>
+   
+      </tr>
+  
+      <tr  v-for="(item,idx) in data" :key="item.id">
+        <template v-if="currentEdit!=item.id">
+          <td>{{item.title}}</td>
+          <td>{{item.code}}</td>
+          <td>{{item.percent}}</td>
+          <td>{{item.due_date}}</td>
+          <td>{{item.is_enabled=="1"?'啟用':'沒用'}}</td>
+        </template>
+        <template v-else>
+          <td><input @keyup.enter="sendEdit(editItem)" type="text" v-model="editItem.title"></td>
+          <td><input @keyup.enter="sendEdit(editItem)" type="text" v-model="editItem.code"></td>
+          <td><input @keyup.enter="sendEdit(editItem)" type="text" v-model="editItem.percent"></td>
+          <td><input @keyup.enter="sendEdit(editItem)" type="date" v-model="editItem.due_date"></td>
+          <td><input @keyup.enter="sendEdit(editItem)" type="checkbox" v-model="editItem.is_enabled" :true-value="1" :false-value="0"></td>
+        </template>
+          <td>
+            <div v-if="currentEdit!=item.id">
+              <button @click="edit(item)" type="button" class="btn btn-info"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .25rem; --bs-btn-font-size: .75rem;">
+              edit
+            </button>
+            <button @click="del(item)" type="button" class="btn btn-danger"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .25rem; --bs-btn-font-size: .75rem;">
+              del
+            </button>
+            </div>
+            <div v-else>
+              <button @click="sendEdit(editItem)" type="button" class="btn btn-success"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .25rem; --bs-btn-font-size: .75rem;">
+              send
+            </button>
+            <button @click="exitEdit(editItem)" type="button" class="btn btn-success"
+              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .25rem; --bs-btn-font-size: .75rem;">
+              exit
+            </button>
+            </div>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+  </form>
+
+  <nav aria-label="...">
+  <ul class="pagination">
+    <li @click.prevent="goPage(pagination.has_pre,currentPage-1)" :class="['page-item',{'disabled':!pagination.has_pre}]">
+      <a class="page-link">Previous</a>
+    </li>
+    <li @click.prevent="goPage(true,item)" class="page-item" v-for="item in pagination.total_pages">
+      <a class="page-link" href="#">{{item}}</a>
+    </li>
+
+    <li @click.prevent="goPage(pagination.has_next,currentPage+1)"  :class="['page-item',{'disabled':!pagination.has_next}]" >
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+</template>
+<style scoped>
+  table{
+    width:min(100%,900px);
+    border-collapse:collapse;
+    border:1px solid black;
+    text-align:center;
+    margin:30px auto;
+  }
+  th,td{
+    padding:3px 8px;
+    border:1px solid black;
+  }
+  input{
+    width:100%;
+  }
+  td>div{
+    display: flex;
+    gap:10px;
+  }
+
+</style>
