@@ -28,7 +28,7 @@ lines[0].appendChild(img)
 
 window.onload = async () => {
   try {
-    res = await axios.get("https://api.kcg.gov.tw/api/service/get/9c8e1450-e833-499c-8320-29b36b7ace5c");
+    res = await axios.get("https://raw.githubusercontent.com/hexschool/KCGTravel/master/datastore_search.json");
     res = res.data.data.XML_Head.Infos.Info;
 
     for (let i=0;i<res.length;i++) {

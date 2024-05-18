@@ -2,7 +2,7 @@
   import {onMounted} from "vue";
   let hrefLink = ["rws.html","balancesheet.html","scroll.html","magzine.html","myprofolio.html",'vueCssDist/index.html']
   let picLink = ["RWSPic.png",'balansheetPic.png','jstechPic.png','magzinPic.png','prepolioPic.png','vueCss.png']
-  let gitLink = ["blob/main/rws.html","blob/main/balancesheet.html","blob/main/scroll.html","blob/main/magzine.html","blob/main/myprofolio.html"," tree/main/vueCss"]
+  let gitLink = ["blob/main/rws.html","blob/main/balancesheet.html","blob/main/scroll.html","blob/main/magzine.html","blob/main/myprofolio.html","tree/main/vueCss"]
   
 
 </script>
