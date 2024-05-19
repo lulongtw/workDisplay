@@ -83,4 +83,7 @@
   margin:13px;
   text-align: center;
 }
+.checkout:hover{
+  cursor: pointer;
+}
 </style>

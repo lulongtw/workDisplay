@@ -24,6 +24,7 @@ export default {
         let method = 'get';
         store.dispatch('getCartList',{url,method})
       }
+      return temp.data.success
     }
   },
 

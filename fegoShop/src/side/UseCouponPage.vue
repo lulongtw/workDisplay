@@ -9,7 +9,9 @@
   let height
   let crtLstTarget
   let crtLst = ref(store.state.cartList);
-  let show = ref(false)
+  let show = ref(false);
+  let couponCode = ref("");
+  let couponRes = ref("")
 
 
   watch(()=>store.state.cartList,
@@ -61,15 +63,18 @@
     }
     store.dispatch('delSingleItemInCart',payload)
   }
-  function useCoupon(e){
+  async function useCoupon(){
     let url = '/api/:api_path/coupon';
     let method = 'post';
     let toSend = {
       "data": {
-        "code": e.target.value
+        "code": couponCode.value
       }
     } ;
-    store.dispatch('useCoupon',{url,method,toSend})
+    couponRes.value = await store.dispatch('useCoupon',{url,method,toSend})
+    if (!couponRes.value){
+      couponCode.value =""
+    }
   }
   
 </script>
@@ -100,7 +105,10 @@
           </tr>
           <tr>
             <td colspan="5" class="coupon">
-              輸入coupon<input @keyup.enter="useCoupon" type="text" placeholder="fego">
+              輸入coupon<input @keyup.enter="useCoupon" type="text" v-model="couponCode" placeholder="fego">
+              <div>
+                <button  v-if="couponCode!=''" @click="useCoupon"  type="button" class="btn btn-warning">送出coupon</button>
+              </div>
               <div>運費$60</div>合計${{Math.floor(crtLst.final_total+60)}}
             </td>
   
@@ -117,6 +125,9 @@
     display:flex;
     justify-content: space-between;
   }
+  .money:hover{
+    cursor:pointer
+  }
   .crtLstTarget{
     overflow: hidden;
     transition:height 1s
@@ -131,6 +142,9 @@
   }
   tr{
     border-bottom:1px solid grey;
+  }
+  tr>td:first-of-type:hover{
+    cursor: pointer;
   }
   table tr:last-of-type{
     border:none;

@@ -67,7 +67,7 @@ const store = createStore({
         context.commit('renewCurrentCategory',Object.keys(temp)[0])
       }
     },
-    //這應該沒用吧？
+    //後台取得所有商品
     async getSellerProductList(context,payload){
       let res = await getData(payload.url,payload.method);
       if (res.data.success){

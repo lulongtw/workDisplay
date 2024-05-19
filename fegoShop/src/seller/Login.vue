@@ -75,7 +75,8 @@
 </template>
 <style scoped>
 p{
-  font-size: 1.5rem;
+  padding:20px;
+  font-size: 1.2rem;
   transition:transition 1s;
 }
 p:hover{
@@ -85,10 +86,8 @@ p:hover{
 }
 @keyframes jump{
   0%{transform:translate(0px,0px)}
-
   50%{transform:translate(0px,-20px)}
   100%{transform:translate(0px,0px)}
-
 }
 
 .bd-placeholder-img {

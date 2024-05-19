@@ -59,9 +59,9 @@
 <template>
   <GoToSellerModal></GoToSellerModal>
   <header>
-    <div @click="showModal('#GoToSellerModal')"><i class="fa-solid fa-paw"></i>肥狗超商</div>
+    <div class="hover" @click="showModal('#GoToSellerModal')"><i class="fa-solid fa-paw"></i>肥狗超商</div>
     <div :style="{position:'relative'}">
-      <div @click="()=>{ showCartLst = !showCartLst}" class="cart">
+      <div @click="()=>{ showCartLst = !showCartLst}" class="cart hover">
       <i class="fa-solid fa-cart-shopping"></i>
       <template v-if="cartList.carts"> <span  :style="{padding:'3px',backgroundColor:'rgb(236, 212, 164)',borderRadius:'10px',marginLeft:'3px'}">{{cartList.carts.length}}</span></template>
     </div>
@@ -86,6 +86,9 @@
 
 </template>
 <style scoped>
+  .hover:hover{
+    cursor:pointer
+  }
   *{
     padding:0xp;margin:0px;
   }
